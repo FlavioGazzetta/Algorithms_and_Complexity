@@ -1,0 +1,65 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+operation_count = 0
+
+def sum_of_n(n):
+    global operation_count
+    sum = 0 # we set sum to 0
+    operation_count += 1 
+    for i in range(1, n+1): # we add 1 to i and compare to n+1
+        sum += i # we add i to sum
+        operation_count += 1
+    return sum
+
+def simple_num_primes_less_than(n):
+    def is_prime(n):
+        if n == 1:
+            return False
+        no_factors = True
+        for j in range(2, n):
+            if n % j == 0:
+                no_factors = False
+        return no_factors
+
+    count = 0
+    for i in range(2, n + 1):
+        if is_prime(i):
+            count += 1
+    return count
+
+
+# x-axis will be n, the integers from 2 to 100
+N = np.arange(2, 101)
+
+# y-axis will be the number of primes less than n
+numprimes = np.array([simple_num_primes_less_than(n) for n in N])
+
+# Avoid zeros or negatives in numprimes when computing logs
+valid_indices = numprimes > 0  # Boolean mask for valid values
+
+# Matplotlib code
+plt.figure(figsize=(8, 3), dpi=150)
+
+# First subplot on the left
+plt.subplot(121)
+plt.plot(N, numprimes)
+plt.xlabel('n')
+plt.ylabel('num primes less than n')
+
+# Second subplot on the right (log-log plot)
+plt.subplot(122)
+plt.plot(np.log(N[valid_indices]), np.log(numprimes[valid_indices]), label='Data')
+
+# Best fit line for log-log data
+slope, intercept = np.polyfit(np.log(N[valid_indices]), np.log(numprimes[valid_indices]), 1)
+plt.plot(
+    np.log(N[valid_indices]), slope * np.log(N[valid_indices]) + intercept,
+    label=f'Best fit slope = {slope:.2f}'
+)
+
+plt.xlabel('log n')
+plt.ylabel('log num primes')
+plt.legend(loc='best')
+plt.tight_layout()
+plt.show()
