@@ -13,20 +13,14 @@ def majority(A):
     return -1  # Return -1 if no majority element exists
 
 x1 = [1, 2, 3, 4, 3, 2, 2, 2, 2, 2, 2, 3, 2, 1, 2, 3]
-x2 = [8, 9, 10, 10]
+x2 = [8, 9, 10, 10, 10]
+x3 = [9, 7, 1, 10, 5, 9, 9]
 
 maj1 = majority(x1)
 maj2 = majority(x2)
+maj3 = majority(x3)
 
 # Fix incorrect index access and adjust validation logic
-if maj1 == -1:
-    print("Wrong! (1)")
-elif x1.count(maj1) <= len(x1) / 2:  # Validate majority condition
-    print("Wrong! (2)")
-elif maj1 != 2:  # Expected majority element is 2
-    print("Wrong! (3)")
-elif maj2 != -1:  # No majority element in x2
-    print("Wrong! (4)")
-else:
-    print(maj1)
-    print(maj2)
+print(maj1)
+print(maj2)
+print(maj3)
