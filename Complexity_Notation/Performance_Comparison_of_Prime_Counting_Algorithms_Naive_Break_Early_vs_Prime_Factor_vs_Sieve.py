@@ -4,6 +4,32 @@ import matplotlib.pyplot as plt
 # Global variable to track operation counts
 operation_count = 0
 
+# Naive Algorithm
+def naive_num_primes_less_than(n):
+    global operation_count
+    operation_count = 0  # Reset operation count
+
+    def is_prime(n):
+        global operation_count
+        if n == 1:
+            operation_count += 1
+            return False
+        no_factors = True
+        for j in range(2, n):
+            operation_count += 1  # Loop comparison
+            if n % j == 0:
+                operation_count += 1  # Modulo operation
+                no_factors = False
+        return no_factors
+
+    count = 0
+    for i in range(2, n + 1):
+        operation_count += 1  # Loop comparison
+        if is_prime(i):
+            count += 1
+            operation_count += 1  # Increment operation
+    return count
+
 # Break Early Algorithm
 def simplest_num_primes_less_than_break(n):
     global operation_count
@@ -73,12 +99,17 @@ def sieve_of_eratosthenes(n):
 
 # Comparison of Algorithms
 N = np.arange(2, 101)  # Range of n values
+operation_counts_naive = []
 operation_counts_break = []
 operation_counts_sqrt = []
 operation_counts_sieve = []
 
 # Collect operation counts for each algorithm
 for n in N:
+    operation_count = 0
+    naive_num_primes_less_than(n)
+    operation_counts_naive.append(operation_count)
+
     operation_count = 0
     simplest_num_primes_less_than_break(n)
     operation_counts_break.append(operation_count)
@@ -94,6 +125,7 @@ for n in N:
 # Plot results
 plt.figure(figsize=(10, 6), dpi=150)
 
+plt.plot(N, operation_counts_naive, label="Naive")
 plt.plot(N, operation_counts_break, label="Break Early")
 plt.plot(N, operation_counts_sqrt, label="Prime Factor (√n)")
 plt.plot(N, operation_counts_sieve, label="Sieve of Eratosthenes")
