@@ -1,0 +1,32 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+def majority(A):
+    n = len(A)
+    for i in range(n):
+        c = 0
+        for j in range(n):
+            if A[i] == A[j]:
+                c = c + 1
+        if c > n / 2:
+            return A[i]  # Return the majority element itself
+    return -1  # Return -1 if no majority element exists
+
+x1 = [1, 2, 3, 4, 3, 2, 2, 2, 2, 2, 2, 3, 2, 1, 2, 3]
+x2 = [8, 9, 10, 10]
+
+maj1 = majority(x1)
+maj2 = majority(x2)
+
+# Fix incorrect index access and adjust validation logic
+if maj1 == -1:
+    print("Wrong! (1)")
+elif x1.count(maj1) <= len(x1) / 2:  # Validate majority condition
+    print("Wrong! (2)")
+elif maj1 != 2:  # Expected majority element is 2
+    print("Wrong! (3)")
+elif maj2 != -1:  # No majority element in x2
+    print("Wrong! (4)")
+else:
+    print(maj1)
+    print(maj2)

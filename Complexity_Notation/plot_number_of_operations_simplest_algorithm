@@ -1,0 +1,66 @@
+import numpy as np
+import matplotlib.pyplot as plt
+
+operation_count = 0  # Global variable to track operations
+
+def simplest_num_primes_less_than(n):  # Updated name
+    global operation_count
+    def is_prime(n):
+        global operation_count
+        if n == 1:
+            operation_count += 1  # Comparison
+            return False
+        no_factors = True
+        for j in range(2, n):
+            operation_count += 1  # Loop comparison
+            if n % j == 0:
+                operation_count += 1  # Modulo operation
+                no_factors = False
+        return no_factors
+
+    count = 0
+    for i in range(2, n + 1):
+        operation_count += 1  # Loop comparison
+        if is_prime(i):
+            count += 1
+            operation_count += 1  # Increment operation
+    return count
+
+# Track operations for a range of values
+N = np.arange(2, 101)  # Range of n values
+operation_counts = []  # List to store operation counts
+
+for n in N:
+    operation_count = 0  # Reset operation count for each n
+    simplest_num_primes_less_than(n)  # Updated function name
+    operation_counts.append(operation_count)  # Record operation count
+
+# Plot results
+plt.figure(figsize=(8, 3), dpi=150)
+
+# Subplot 1: Operations vs n
+plt.subplot(121)
+plt.plot(N, operation_counts, label='Operations')
+plt.xlabel('n')
+plt.ylabel('Number of Operations')
+plt.title('Operations vs n')
+plt.legend(loc='best')
+
+# Subplot 2: Log-log plot
+valid_indices = np.array(operation_counts) > 0  # Ensure no log(0)
+plt.subplot(122)
+plt.plot(np.log(N[valid_indices]), np.log(np.array(operation_counts)[valid_indices]), label='Data')
+
+# Best fit line
+slope, intercept = np.polyfit(np.log(N[valid_indices]), np.log(np.array(operation_counts)[valid_indices]), 1)
+plt.plot(
+    np.log(N[valid_indices]), slope * np.log(N[valid_indices]) + intercept,
+    label=f'Best fit slope = {slope:.2f}'
+)
+
+plt.xlabel('log n')
+plt.ylabel('log Operations')
+plt.title('Log-Log Plot')
+plt.legend(loc='best')
+plt.tight_layout()
+plt.show()
