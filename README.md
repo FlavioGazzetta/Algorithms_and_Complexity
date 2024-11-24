@@ -4,6 +4,7 @@ This repository contains implementations and analyses of various algorithms cate
 1. **Complexity Notation** - Focused on prime counting algorithms.
 2. **Divide and Conquer** - Includes the Merge Sort algorithm and related techniques.
 3. **Introduction and Fibonacci** - Covers Fibonacci sequence computation and introductory algorithms.
+4. **Matrix Chain Multiplication Problem** - Explores efficient matrix multiplication using dynamic programming.
 
 ---
 
@@ -72,6 +73,64 @@ This section covers the **Fibonacci sequence**, with multiple algorithms for com
 - Efficient computation of Fibonacci numbers for large \( n \).
 - Comparison of runtime for different Fibonacci algorithms.
 - Test cases to validate the implementations.
+
+---
+
+### 4. Matrix Chain Multiplication Problem
+This section explores efficient methods for multiplying matrices using both brute force and dynamic programming approaches.
+
+#### Problem Description:
+Matrix multiplication is associative but not commutative. When multiplying multiple matrices, the order of multiplication (parenthesization) affects the number of computations required. The goal is to find the most efficient way to multiply matrices to minimize the number of scalar multiplications.
+
+---
+
+#### (a) Basic Calculation:
+Given matrices A₁, A₂, A₃, and A₄ with dimensions:
+- A₁: 5 × 4
+- A₂: 4 × 6
+- A₃: 6 × 2
+- A₄: 2 × 7
+
+**Task:**  
+- Compute all possible ways of performing the multiplication `A₁ × A₂ × A₃ × A₄`.
+- Calculate the total number of scalar multiplications for each parenthesization.
+
+---
+
+#### (b) Number of Alternative Parenthesizations:
+For multiplying matrices `A₁ × A₂ × ... × Aₙ`:
+1. Base Cases:
+   - `P(1) = 1`
+   - `P(2) = 1`
+
+2. Recursive Case:
+   - `P(n) = Σ(k=1 to n-1) P(k) × P(n-k)` for `n ≥ 3`
+
+#### Key Proof:
+- Prove that `P(n + 1) ≥ P(n) + P(n - 1)`  
+- Relate `P(n)` to Fibonacci numbers and show its exponential growth.
+
+---
+
+#### (c) Dynamic Programming Approach:
+This section describes the use of dynamic programming to find the most efficient multiplication order.
+
+1. **Recurrence Relationship:**
+   If the optimal solution of `Aᵢⱼ` involves splitting into `Aᵢₖ` and `Aₖ₊₁ⱼ`, the recurrence is:
+   - `m[i, j] = min (m[i, k] + m[k + 1, j] + pᵢ₋₁ × pₖ × pⱼ)`
+
+2. **Example:**
+   For matrices A₁, A₂, A₃, and A₄ with dimensions:
+   - `p₀ = 5, p₁ = 4, p₂ = 6, p₃ = 2, p₄ = 7`
+
+   Compute `m[1, 4]` using the recurrence relation.
+
+---
+
+#### Key Features:
+- Brute force parenthesization exploration.
+- Efficient dynamic programming solution.
+- Analysis of time complexity and advantages.
 
 ---
 
