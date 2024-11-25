@@ -104,7 +104,7 @@ For multiplying matrices `A₁ × A₂ × ... × Aₙ`:
    - `P(2) = 1`
 
 2. Recursive Case:
-   - `P(n) = Σ(k=1 to n-1) P(k) × P(n-k)` for `n ≥ 3`
+   - `P(n) = Σ(k=1 to n-1) P(k) × P(n-k)` if `n ≥ 3`
 
 #### Key Proof:
 - Prove that `P(n + 1) ≥ P(n) + P(n - 1)`  
