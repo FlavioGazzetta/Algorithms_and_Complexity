@@ -123,7 +123,7 @@ This section describes the use of dynamic programming to find the most efficient
    For matrices A₁, A₂, A₃, and A₄ with dimensions:
    - `p₀ = 5, p₁ = 4, p₂ = 6, p₃ = 2, p₄ = 7`
 
-   Compute `m[1, 4]` using the recurrence relation.
+   Compute `m[1, 4]` with the recurrence relation.
 
 ---
 
