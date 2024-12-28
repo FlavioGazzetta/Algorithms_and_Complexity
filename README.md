@@ -1,6 +1,6 @@
 # Algorithms and Complexity
 
-This repository contains implementations and analyses of various algorithms categorized into three key areas:
+This repository contains implementations of various algorithms categorized into three key areas:
 1. **Complexity Notation** - Focused on prime counting algorithms.
 2. **Divide and Conquer** - Includes the Merge Sort algorithm and related techniques.
 3. **Introduction and Fibonacci** - Covers Fibonacci sequence computation and introductory algorithms.
